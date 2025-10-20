@@ -1,0 +1,4 @@
+/data/user/zmai090/xts_data/real_world_demo/1/rgb_video/4_process.mp4
+/data/user/zmai090/xts_data/real_world_demo/1/rgb_video/2_process.mp4
+/data/user/zmai090/xts_data/real_world_demo/1/rgb_video/3_process.mp4
+/data/user/zmai090/xts_data/real_world_demo/1/rgb_video/1_process.mp4
