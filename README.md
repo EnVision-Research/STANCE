@@ -13,7 +13,11 @@ HKUST(GZ) · HKUST · XMU · MIT
 
 ## 🎏 Introduction
 
-**STANCE** is a controllable image-to-video framework that keeps motion consistent while preserving appearance. **Problem—** purely visual video diffusion looks great but often drifts or “hovers” near contacts, and sparse control maps get washed out after encoding. **Key idea—** convert simple, human-editable hints into a **dense, 2.5D per-instance cue** and keep them salient with **Dense RoPE**—spatially addressable motion tokens anchored on the first frame—while jointly predicting RGB with a lightweight structural head as a geometry/consistency witness. **Result—** better direction/speed/mass faithfulness, cleaner contact onsets, and reduced drift—without requiring frame-by-frame trajectories.
+**STANCE** is a controllable image-to-video framework that keeps motion consistent while preserving appearance. 
+
+* **Problem.** Purely visual video diffusion looks great but drifts or “hovers” near contacts, and sparse control maps get washed out after encoding.
+* **Key idea.** Turn masks/arrows (+ optional depth, mass) into dense 2.5D instance cues; keep them salient with **Dense RoPE** and stabilize with a joint RGB + structural head.
+* **Result.** Contact-aware, drift-resistant motion with faithful direction/speed/mass—without per-frame trajectories.
 
 
 <details>
