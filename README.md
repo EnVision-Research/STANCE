@@ -10,10 +10,6 @@ HKUST(GZ) · HKUST · XMU · MIT
 
 ---
 
-<p align="center">
-  <img src="=resources/teaser-1.png" alt="STANCE Teaser" />
-</p>
-
 ## 🎏 Introduction
 
 **STANCE** is a controllable image-to-video framework that keeps motion consistent while preserving appearance. Users provide a keyframe plus **instance masks**, **coarse 2D arrows** (direction/speed), an optional **depth delta** (2.5D), and **per-instance mass**. We convert these sparse hints into **dense, pixel-aligned motion cues** and inject them with **Dense RoPE** tokens so the control remains strong after tokenization. We also **jointly predict RGB + a lightweight structural map** (depth or segmentation) to stabilize temporal coherence.
