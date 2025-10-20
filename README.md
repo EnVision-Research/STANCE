@@ -169,7 +169,7 @@ bash scripts/train.sh
 @inproceedings{STANCE2026,
   title     = {STANCE: Motion-Coherent Video Generation via Sparse-to-Dense Anchored Encoding},
   author    = {TBD},
-  booktitle = {ICLR},
+  booktitle = {},
   year      = {2026}
 }
 ```
