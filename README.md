@@ -130,25 +130,40 @@ depth_model = AutoModelForDepthEstimation.from_pretrained(
 
 ## 📦 Data
 
-We provide Kubric rendering scripts (to be released) covering **200k** rigid-interaction clips across (i) simple multi-object collisions and (ii) composite realistic scenes. We randomize object shape, mass, initial velocity, placement/pose, and backgrounds; we keep camera intrinsics/extrinsics consistent within a scene. Held-out validation/test avoid asset/scene leakage.
+We provide Kubric rendering scripts (to be released) covering rigid-interaction clips across (i) simple multi-object collisions and (ii) composite realistic scenes. We randomize object shape, mass, initial velocity, placement/pose, and backgrounds; we keep camera intrinsics/extrinsics consistent within a scene. Please refer to the **Dataset** download link above.
+
+**Post-download step.** After downloading, run the script below (update the dataset path inside the script as needed) to generate the valid video paths for training:
+
+```bash
+python /hpc2hdd/home/zchen379/sd3/STANCE/finetune/find_video.py
+```
 
 ---
 
-## 💫 Training
+## 💫 Training & Inference
+
+Use the provided shell entrypoints (edit paths/configs inside the scripts as needed):
 
 ```bash
-# single-node example (configs are placeholders)
-python train.py \
-  --config configs/stance_cogvidx.yaml \
-  --data data/stance_cues \
-  --output runs/stance_cogvidx
+# Training (finetune STANCE on your dataset)
+bash YOUR/OWN/PATH/STANCE/finetune/train_stance.sh
 
-# or a simple launcher
-bash scripts/train.sh
+# Inference (generate video from a keyframe + cues)
+bash YOUR/OWN/PATH/STANCE/finetune/infer_stance.sh
 ```
 
-* **Cue injection:** Instance Cues (u, v, ∆z, mass) are concatenated with video inputs and turned into motion tokens via **Dense RoPE**.
-* **Objective:** Standard diffusion loss with a single weight for the auxiliary head (depth or seg).
+**Notes**
+
+* Replace `YOUR/OWN/PATH` with your absolute path (e.g., `/hpc2hdd/home/zchen379/sd3`).
+* Make scripts executable if needed:
+
+  ```bash
+  chmod +x YOUR/OWN/PATH/STANCE/finetune/train_stance.sh
+  chmod +x YOUR/OWN/PATH/STANCE/finetune/infer_stance.sh
+  ```
+* The scripts expect CogVideoX + DepthAnythingV2 weights in your Hugging Face cache and your dataset prepared per the README.
+* Output directories, resolution, and batch settings are configurable inside the scripts.
+
 
 ---
 
