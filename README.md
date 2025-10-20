@@ -6,25 +6,24 @@ HKUST(GZ) · HKUST · XMU · MIT
 
 <sup>*</sup> Equal contribution.  <sup>†</sup> Corresponding author.
 
-
 <a href="#"><img src="https://img.shields.io/badge/Project_Page-Coming_Soon-lightgrey"></a> <a href="#"><img src="https://img.shields.io/badge/Paper-Under_Review-blue"></a> <a href="#"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace%20Demo-Coming%20Soon-lightgrey"></a> <a href="#"><img src="https://img.shields.io/badge/Dataset-Coming%20Soon-lightgrey"></a>
 
 ---
 
+<p align="center">
+  <img src="resources/teaser.png" alt="STANCE Teaser" />
+</p>
+
 ## 🎏 Introduction
 
-**STANCE** is a controllable image-to-video framework that keeps motion consistent while preserving appearance. 
-
-* **Problem.** Purely visual video diffusion looks great but drifts or “hovers” near contacts, and sparse control maps get washed out after encoding.
-* **Key idea.** Turn masks/arrows (+ optional depth, mass) into dense 2.5D instance cues; keep them salient with **Dense RoPE** and stabilize with a joint RGB + structural head.
-* **Result.** Contact-aware, drift-resistant motion with faithful direction/speed/mass—without per-frame trajectories.
-
+**STANCE** is a controllable image-to-video framework that keeps motion consistent while preserving appearance. Users provide a keyframe plus **instance masks**, **coarse 2D arrows** (direction/speed), an optional **depth delta** (2.5D), and **per-instance mass**. We convert these sparse hints into **dense, pixel-aligned motion cues** and inject them with **Dense RoPE** tokens so the control remains strong after tokenization. We also **jointly predict RGB + a lightweight structural map** (depth or segmentation) to stabilize temporal coherence.
 
 <details>
 <summary>CLICK for the full abstract-style summary</summary>
-Video generation has recently made striking visual progress, but maintaining coherent object motion and interactions remains difficult. We trace two practical bottlenecks: (i) human-provided motion hints (e.g., small 2D maps) often collapse to too few effective tokens after encoding, weakening guidance; and (ii) optimizing for appearance and motion in a single head can favor texture over temporal consistency. We present \textbf{STANCE}, an image-to-video framework that addresses both issues with two simple components.
-First, we introduce Instance Cues—a pixel-aligned control signal that turns sparse, user-editable hints into a dense 2.5D (camera-relative) motion field by averaging per-instance flow and augmenting with monocular depth over the instance mask. This reduces depth ambiguity compared to 2D drag/arrow inputs while remaining easy to user. Second, we preserve the salience of these cues in token space with Dense RoPE, which tags a small set of motion tokens (anchored on the first frame) with spatial-addressable rotary embeddings. Paired with joint RGB + auxiliary-map prediction (segmentation or depth), our model anchors structure while RGB handles appearance, stabilizing optimization and improving temporal coherence without requiring per-frame trajectory scripts.
 
+* **Problem.** Purely visual video diffusion looks great but often drifts or “hovers” near contacts; sparse control maps get washed out after encoding.
+* **Key idea.** Turn human-editable hints into a **dense, 2.5D instance cue** per object; keep those cues salient in token space via **Dense RoPE** (spatially addressable motion tokens anchored on the first frame). Train RGB **with** an auxiliary structural head to act as a geometry/consistency witness.
+* **Result.** Better direction/speed/mass faithfulness, cleaner contact onsets, and less drift—without frame-by-frame trajectories.
 
 </details>
 
@@ -32,9 +31,10 @@ First, we introduce Instance Cues—a pixel-aligned control signal that turns sp
 
 ## 💡 Method at a glance
 
-> *Pipeline figure placeholder*
-> `<img src="assets/pipeline.png" width="80%">`
-> *Overall Architecture*
+<p align="center">
+  <img src="resources/stance.drawio.png" alt="STANCE Pipeline / Overall Architecture" />
+  <br/><em>Overall Architecture</em>
+</p>
 
 **Instance Cues (Sparse → Dense, 2.5D).** From per-instance arrows + masks (+ optional depth delta), we rasterize a **dense in-mask vector field** and append a **scalar ∆z** channel (camera-relative), disambiguating out-of-plane intent under camera motion. Training uses per-instance averaged flow (+ monocular depth) to match the test-time cue format.
 
@@ -50,8 +50,11 @@ First, we introduce Instance Cues—a pixel-aligned control signal that turns sp
 * **Mass sweeps:** Changing mass flips post-contact outcomes (e.g., light object deflects vs. heavy object pushes through).
 * **Real-world tabletop demos:** Identity-preserving motion and plausible chain reactions from a phone-captured keyframe.
 
-> *Applications figure placeholder*
-> `<img src="assets/applications.png" width="80%">`
+<p align="center">
+  <img src="resources/quali_v5.png" alt="STANCE Qualitative Results" />
+  <br/>
+  <img src="resources/real_world.png" alt="STANCE Real-World Demos" />
+</p>
 
 ---
 
@@ -108,13 +111,33 @@ huggingface-cli download depth-anything/Depth-Anything-V2-Large \
 ln -sfn "$HF_HOME/hub" "$HF_HOME/models"
 ```
 
+#### Load locally (no network)
+
+```python
+from diffusers import CogVideoXImageToVideoPipeline
+from transformers import AutoModelForDepthEstimation, AutoImageProcessor
+
+# CogVideoX backbone (diffusers)
+pipe = CogVideoXImageToVideoPipeline.from_pretrained(
+    "THUDM/CogVideoX1.5-5B-I2V", local_files_only=True
+)
+
+# Depth Anything V2 (transformers)
+proc = AutoImageProcessor.from_pretrained(
+    "depth-anything/Depth-Anything-V2-Large", local_files_only=True
+)
+depth_model = AutoModelForDepthEstimation.from_pretrained(
+    "depth-anything/Depth-Anything-V2-Large", local_files_only=True
+)
+```
+
 > **Backbone.** We fine-tune a **CogVideoX-1.5 (5B) image-to-video** backbone; default generation is **512×512, 49 frames @ 16 FPS**.
 
 ---
 
 ## 📦 Data
 
-We provide Kubric rendering scripts (to be released) covering rigid-interaction clips across (i) simple multi-object collisions and (ii) composite realistic scenes. We randomize object shape, mass, initial velocity, placement/pose, and backgrounds; we keep camera intrinsics/extrinsics consistent within a scene. Please refer to the **Dataset** download link above.
+We provide Kubric rendering scripts (to be released) covering rigid-interaction clips across (i) simple multi-object collisions and (ii) composite realistic scenes. We randomize object shape, mass, initial velocity, placement/pose, and backgrounds; we keep camera intrinsics/extrinsics consistent within a scene. Please refer to the dataset download page above.
 
 **Post-download step.** After downloading, run the script below (update the dataset path inside the script as needed) to generate the valid video paths for training:
 
@@ -126,28 +149,20 @@ python /hpc2hdd/home/zchen379/sd3/STANCE/finetune/find_video.py
 
 ## 💫 Training & Inference
 
-Use the provided shell entrypoints (edit paths/configs inside the scripts as needed):
-
 ```bash
-# Training (finetune STANCE on your dataset)
+# Training
 bash YOUR/OWN/PATH/STANCE/finetune/train_stance.sh
 
-# Inference (generate video from a keyframe + cues)
+# Inference
 bash YOUR/OWN/PATH/STANCE/finetune/infer_stance.sh
 ```
 
-**Notes**
-
-* Replace `YOUR/OWN/PATH` with your absolute path (e.g., `/hpc2hdd/home/zchen379/sd3`).
-* Make scripts executable if needed:
-
-  ```bash
-  chmod +x YOUR/OWN/PATH/STANCE/finetune/train_stance.sh
-  chmod +x YOUR/OWN/PATH/STANCE/finetune/infer_stance.sh
-  ```
-* The scripts expect CogVideoX + DepthAnythingV2 weights in your Hugging Face cache and your dataset prepared per the README.
-* Output directories, resolution, and batch settings are configurable inside the scripts.
-
+> Replace `YOUR/OWN/PATH` with your actual absolute path (e.g., `/hpc2hdd/home/zchen379/sd3`). Ensure the scripts are executable:
+>
+> ```bash
+> chmod +x YOUR/OWN/PATH/STANCE/finetune/train_stance.sh
+> chmod +x YOUR/OWN/PATH/STANCE/finetune/infer_stance.sh
+> ```
 
 ---
 
@@ -168,7 +183,7 @@ bash YOUR/OWN/PATH/STANCE/finetune/infer_stance.sh
 @inproceedings{STANCE2026,
   title     = {STANCE: Motion-Coherent Video Generation via Sparse-to-Dense Anchored Encoding},
   author    = {TBD},
-  booktitle = {},
+  booktitle = {ICLR},
   year      = {2026}
 }
 ```
