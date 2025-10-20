@@ -6,7 +6,10 @@ HKUST(GZ) · HKUST · XMU · MIT
 
 <sup>*</sup> Equal contribution.  <sup>†</sup> Corresponding author.
 
-<a href="#"><img src="https://img.shields.io/badge/Project_Page-Coming_Soon-lightgrey"></a> <a href="#"><img src="https://img.shields.io/badge/Paper-Under_Review-blue"></a> <a href="#"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace%20Demo-Coming%20Soon-lightgrey"></a> <a href="#"><img src="https://img.shields.io/badge/Dataset-Coming%20Soon-lightgrey"></a>
+<a href="#"><img src="https://img.shields.io/badge/Project_Page-Coming_Soon-EA3A97"></a>
+<a href="#"><img src="https://img.shields.io/badge/Paper-Under_Review-red"></a>
+<a href="#"><img src="https://img.shields.io/badge/Dataset-Coming%20Soon-blue"></a>
+<a href="#"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace%20Demo-Coming%20Soon-orange"></a>
 
 ---
 
