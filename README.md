@@ -165,7 +165,7 @@ bash YOUR/OWN/PATH/STANCE/finetune/infer_stance.sh
 @inproceedings{STANCE2026,
   title     = {STANCE: Motion-Coherent Video Generation via Sparse-to-Dense Anchored Encoding},
   author    = {TBD},
-  booktitle = {ICLR},
+  booktitle = {ARXIV},
   year      = {2026}
 }
 ```
