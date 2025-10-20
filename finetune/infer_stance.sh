@@ -5,7 +5,7 @@ export TOKENIZERS_PARALLELISM=false
 export HF_HUB_OFFLINE=1
 export DISABLE_TELEMETRY=YES
 
-NAME="video_generation_runs_realistic_demo_new"
+NAME="video_generation_runs"
 ITERS=165000
 
 # Model Configuration
@@ -22,7 +22,7 @@ MODEL_ARGS=(
 
 # Output Configuration
 OUTPUT_ARGS=(
-    --output_dir /data/user/zmai090/C/infer/$NAME/$ITERS
+    --output_dir /YOUR/OWN/PRETRAINED/PATH/$NAME/$ITERS
     --report_to "tensorboard"
 )
 
@@ -30,7 +30,7 @@ OUTPUT_ARGS=(
 DATA_ARGS=(
     --data_root "not_important"
     --caption_column "not_important"
-    --video_column "demo_demo_demo.txt"
+    --video_column "YOUR_FIND_VIDEO_PATH.txt"
     # --video_column "videos_1obj_val.txt"
     --train_resolution "49x256x256"
 )
@@ -55,7 +55,7 @@ SYSTEM_ARGS=(
 CHECKPOINT_ARGS=(
     --checkpointing_steps 1000 # save checkpoint every x steps
     --checkpointing_limit 15 # maximum number of checkpoints to keep, after which the oldest one is deleted
-    --load_pretrained_weight "/data/user/zmai090/C/$NAME/checkpoint-$ITERS/pytorch_model/mp_rank_00_model_states.pt" 
+    --load_pretrained_weight "/YOUR/OWN/PRETRAINED/PATH/$NAME/checkpoint-$ITERS/pytorch_model/mp_rank_00_model_states.pt" 
 )
 
 # Validation Configuration
@@ -78,16 +78,3 @@ accelerate launch --num_processes=1 train.py \
     "${SYSTEM_ARGS[@]}" \
     "${CHECKPOINT_ARGS[@]}" \
     "${VALIDATION_ARGS[@]}"
-
-# sft
-# accelerate launch --config_file accelerate_config.yaml train.py \
-#     "${MODEL_ARGS[@]}" \
-#     "${OUTPUT_ARGS[@]}" \
-#     "${DATA_ARGS[@]}" \
-#     "${TRAIN_ARGS[@]}" \
-#     "${SYSTEM_ARGS[@]}" \
-#     "${CHECKPOINT_ARGS[@]}" \
-#     "${VALIDATION_ARGS[@]}"
-
-# --config_file 0.yaml
-# bash infer.sh

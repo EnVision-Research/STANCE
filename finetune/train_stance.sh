@@ -16,7 +16,7 @@ MODEL_ARGS=(
 # Output Configuration
 OUTPUT_ARGS=(
     # v1: joint_SegRgb_dense_0.5NC_3dflow_3frames_vitb
-    --output_dir "/data/user/zmai090/C/video_generation_runs_realistic_demo_demo_demo_ft"
+    --output_dir "YOUR/OUTPUT/DIR"
     --report_to "tensorboard"  # ["tensorboard", "wandb"]
 )
 
@@ -26,8 +26,7 @@ DATA_ARGS=(
     --caption_column "not important"
     --train_resolution "49x256x256"  # (frames x height x width), frames should be 8N+1
     # --video_column "videos_2-5objs_train.txt"
-    --video_column "demo_demo_demo.txt"
-)
+    --video_column "YOUR_FIND_VIDEO_PATH.txt"
 
 # Training Configuration
 TRAIN_ARGS=(
