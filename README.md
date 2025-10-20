@@ -13,14 +13,14 @@ HKUST(GZ) · HKUST · XMU · MIT
 
 ## 🎏 Introduction
 
-**STANCE** is a controllable image-to-video framework that keeps motion consistent while preserving appearance. Users provide a keyframe plus **instance masks**, **coarse 2D arrows** (direction/speed), an optional **depth delta** (2.5D), and **per-instance mass**. We convert these sparse hints into **dense, pixel-aligned motion cues** and inject them with **Dense RoPE** tokens so the control remains strong after tokenization. We also **jointly predict RGB + a lightweight structural map** (depth or segmentation) to stabilize temporal coherence.
+**STANCE** is a controllable image-to-video framework that keeps motion consistent while preserving appearance. **Problem—** purely visual video diffusion looks great but often drifts or “hovers” near contacts, and sparse control maps get washed out after encoding. **Key idea—** convert simple, human-editable hints into a **dense, 2.5D per-instance cue** and keep them salient with **Dense RoPE**—spatially addressable motion tokens anchored on the first frame—while jointly predicting RGB with a lightweight structural head as a geometry/consistency witness. **Result—** better direction/speed/mass faithfulness, cleaner contact onsets, and reduced drift—without requiring frame-by-frame trajectories.
+
 
 <details>
 <summary>CLICK for the full abstract-style summary</summary>
+Video generation has recently made striking visual progress, but maintaining coherent object motion and interactions remains difficult. We trace two practical bottlenecks: (i) human-provided motion hints (e.g., small 2D maps) often collapse to too few effective tokens after encoding, weakening guidance; and (ii) optimizing for appearance and motion in a single head can favor texture over temporal consistency. We present \textbf{STANCE}, an image-to-video framework that addresses both issues with two simple components.
+First, we introduce Instance Cues—a pixel-aligned control signal that turns sparse, user-editable hints into a dense 2.5D (camera-relative) motion field by averaging per-instance flow and augmenting with monocular depth over the instance mask. This reduces depth ambiguity compared to 2D drag/arrow inputs while remaining easy to user. Second, we preserve the salience of these cues in token space with Dense RoPE, which tags a small set of motion tokens (anchored on the first frame) with spatial-addressable rotary embeddings. Paired with joint RGB + auxiliary-map prediction (segmentation or depth), our model anchors structure while RGB handles appearance, stabilizing optimization and improving temporal coherence without requiring per-frame trajectory scripts.
 
-* **Problem.** Purely visual video diffusion looks great but often drifts or “hovers” near contacts; sparse control maps get washed out after encoding.
-* **Key idea.** Turn human-editable hints into a **dense, 2.5D instance cue** per object; keep those cues salient in token space via **Dense RoPE** (spatially addressable motion tokens anchored on the first frame). Train RGB **with** an auxiliary structural head to act as a geometry/consistency witness.
-* **Result.** Better direction/speed/mass faithfulness, cleaner contact onsets, and less drift—without frame-by-frame trajectories.
 
 </details>
 
