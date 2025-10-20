@@ -1,10 +1,7 @@
 # STANCE: Motion-Coherent Video Generation via Sparse-to-Dense Anchored Encoding
 
-[ZhiFei Chen]()<sup>*</sup>, [Tianshuo Xu]()<sup>*</sup>, [Leyi Wu]()<sup>*</sup>, [Luozhou Wang](), [Dongyu Yan](), [Zihan You](), [Wenting Luo](), [Guo Zhang](), [Yingcong Chen](https://www.yingcong.me)<sup>†</sup>
+[ZhiFei Chen](https://zhifeichen097.github.io/), [Tianshuo Xu](https://scholar.google.com/citations?user=I6_dXvEAAAAJ&hl=zh-CN), [Leyi Wu](https://yuevii.github.io/), [Luozhou Wang](https://wileewang.github.io/), [Dongyu Yan](http://me.starydy.xyz/), [Zihan You](), [Wenting Luo](), [Guo Zhang](), [Yingcong Chen](https://www.yingcong.me)<sup>†</sup>
 
-HKUST(GZ) · HKUST · XMU · MIT
-
-<sup>*</sup> Equal contribution.  <sup>†</sup> Corresponding author.
 
 <a href="#"><img src="https://img.shields.io/badge/Project_Page-Coming_Soon-EA3A97"></a>
 <a href="#"><img src="https://img.shields.io/badge/Paper-Under_Review-red"></a>
