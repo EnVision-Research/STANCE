@@ -613,6 +613,7 @@ class CogVideoXI2VLoraTrainer(Trainer):
         while len(weights.shape) < len(latent_pred.shape):
             weights = weights.unsqueeze(-1)
 
+
         if train_mode == "Motion":
             latent_error = (latent_pred - latent_cond) ** 2
         else:
