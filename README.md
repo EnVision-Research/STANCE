@@ -1,11 +1,11 @@
 # STANCE: Motion-Coherent Video Generation via Sparse-to-Dense Anchored Encoding
 
-[ZhiFei Chen]()$^{*}$, [Tianshuo Xu]()$^{*}$, [Leyi Wu]()$^{*}$, [Luozhou Wang](), [Dongyu Yan](), [Zihan You](), [Wenting Luo](), [Guo Zhang](), [Yingcong Chen](https://www.yingcong.me)$^{**}$
+[ZhiFei Chen]()<sup>*</sup>, [Tianshuo Xu]()<sup>*</sup>, [Leyi Wu]()<sup>*</sup>, [Luozhou Wang](), [Dongyu Yan](), [Zihan You](), [Wenting Luo](), [Guo Zhang](), [Yingcong Chen](https://www.yingcong.me)<sup>†</sup>
 
-HKUST(GZ), HKUST, XMU, MIT
+HKUST(GZ) · HKUST · XMU · MIT
 
-${*}$: Equal contribution.
-**: Corresponding author.
+<sup>*</sup> Equal contribution.  <sup>†</sup> Corresponding author.
+
 
 <a href="#"><img src="https://img.shields.io/badge/Project_Page-Coming_Soon-lightgrey"></a> <a href="#"><img src="https://img.shields.io/badge/Paper-Under_Review-blue"></a> <a href="#"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace%20Demo-Coming%20Soon-lightgrey"></a> <a href="#"><img src="https://img.shields.io/badge/Dataset-Coming%20Soon-lightgrey"></a>
 
@@ -102,26 +102,6 @@ huggingface-cli download depth-anything/Depth-Anything-V2-Large \
 
 # (optional) mirror the hub directory to the parent cache for legacy code paths
 ln -sfn "$HF_HOME/hub" "$HF_HOME/models"
-```
-
-#### Load locally (no network)
-
-```python
-from diffusers import CogVideoXImageToVideoPipeline
-from transformers import AutoModelForDepthEstimation, AutoImageProcessor
-
-# CogVideoX backbone (diffusers)
-pipe = CogVideoXImageToVideoPipeline.from_pretrained(
-    "THUDM/CogVideoX1.5-5B-I2V", local_files_only=True
-)
-
-# Depth Anything V2 (transformers)
-proc = AutoImageProcessor.from_pretrained(
-    "depth-anything/Depth-Anything-V2-Large", local_files_only=True
-)
-depth_model = AutoModelForDepthEstimation.from_pretrained(
-    "depth-anything/Depth-Anything-V2-Large", local_files_only=True
-)
 ```
 
 > **Backbone.** We fine-tune a **CogVideoX-1.5 (5B) image-to-video** backbone; default generation is **512×512, 49 frames @ 16 FPS**.
