@@ -11,7 +11,7 @@ HKUST(GZ) · HKUST · XMU · MIT
 ---
 
 <p align="center">
-  <img src="resources/teaser.png" alt="STANCE Teaser" />
+  <img src="=resources/teaser-1.png" alt="STANCE Teaser" />
 </p>
 
 ## 🎏 Introduction
@@ -32,7 +32,7 @@ HKUST(GZ) · HKUST · XMU · MIT
 ## 💡 Method at a glance
 
 <p align="center">
-  <img src="resources/stance.drawio.png" alt="STANCE Pipeline / Overall Architecture" />
+  <img src="resources/stance.drawio-1.png" alt="STANCE Pipeline / Overall Architecture" />
   <br/><em>Overall Architecture</em>
 </p>
 
@@ -51,9 +51,9 @@ HKUST(GZ) · HKUST · XMU · MIT
 * **Real-world tabletop demos:** Identity-preserving motion and plausible chain reactions from a phone-captured keyframe.
 
 <p align="center">
-  <img src="resources/quali_v5.png" alt="STANCE Qualitative Results" />
+  <img src="resources/quali_v5-1.png" alt="STANCE Qualitative Results" />
   <br/>
-  <img src="resources/real_world.png" alt="STANCE Real-World Demos" />
+  <img src="resources/real_world-1.png" alt="STANCE Real-World Demos" />
 </p>
 
 ---
