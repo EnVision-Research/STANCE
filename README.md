@@ -3,9 +3,9 @@
 [ZhiFei Chen](https://zhifeichen097.github.io/), [Tianshuo Xu](https://scholar.google.com/citations?user=I6_dXvEAAAAJ&hl=zh-CN), [Leyi Wu](https://yuevii.github.io/), [Luozhou Wang](https://wileewang.github.io/), [Dongyu Yan](http://me.starydy.xyz/), [Zihan You](), [Wenting Luo](), [Guo Zhang](), [Yingcong Chen](https://www.yingcong.me)<sup>†</sup>
 
 
-<a href="https://envision-research.github.io/STANCE/"><img src="https://img.shields.io/badge/Project_Page-EA3A97"></a>
-<a href="https://arxiv.org/pdf/2510.14588"><img src="https://img.shields.io/badge/Paper-red"></a>
-<a href="#"><img src="https://img.shields.io/badge/Dataset%20Soon-blue"></a>
+<a href="https://envision-research.github.io/STANCE/"><img src="https://img.shields.io/badge/Project_Page-Online-EA3A97"></a>
+<a href="https://arxiv.org/pdf/2510.14588"><img src="https://img.shields.io/badge/ArXiv-2510.14588-brightgreen"></a> 
+<a href="#"><img src="https://img.shields.io/badge/Dataset-Online-blue"></a>
 <a href="#"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace%20Demo-Coming%20Soon-orange"></a>
 
 ---
