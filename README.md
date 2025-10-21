@@ -4,7 +4,7 @@
 
 
 <a href="https://envision-research.github.io/STANCE/"><img src="https://img.shields.io/badge/Project_Page-EA3A97"></a>
-<a href="https://arxiv.org/pdf/2510.14588"><img src="https://img.shields.io/badge/Paper"></a>
+<a href="https://arxiv.org/pdf/2510.14588"><img src="https://img.shields.io/badge/Paper-red"></a>
 <a href="#"><img src="https://img.shields.io/badge/Dataset%20Soon-blue"></a>
 <a href="#"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace%20Demo-Coming%20Soon-orange"></a>
 
