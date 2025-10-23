@@ -4,7 +4,7 @@
 
 
 <a href="https://envision-research.github.io/STANCE/"><img src="https://img.shields.io/badge/Project_Page-Online-EA3A97"></a>
-<a href="https://arxiv.org/pdf/2510.14588"><img src="https://img.shields.io/badge/ArXiv-2510.14588-brightgreen"></a> 
+<a href="https://arxiv.org/abs/2510.14588"><img src="https://img.shields.io/badge/ArXiv-2510.14588-brightgreen"></a> 
 <a href="#"><img src="https://img.shields.io/badge/Dataset-Online-blue"></a>
 <a href="#"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace%20Demo-Coming%20Soon-orange"></a>
 
@@ -159,10 +159,11 @@ bash YOUR/OWN/PATH/STANCE/finetune/infer_stance.sh
 > Update after arXiv goes live
 
 ```bibtex
-@inproceedings{STANCE2026,
-  title     = {STANCE: Motion-Coherent Video Generation via Sparse-to-Dense Anchored Encoding},
-  author    = {TBD},
-  booktitle = {ARXIV},
-  year      = {2026}
+@article{chen2025stance,
+      title={STANCE: Motion Coherent Video Generation Via Sparse-to-Dense Anchored Encoding}, 
+      author={Zhifei Chen and Tianshuo Xu and Leyi Wu and Luozhou Wang and Dongyu Yan and Zihan You and Wenting Luo and Guo Zhang and Yingcong Chen},
+      journal={arXiv preprint arXiv:2510.14588},
+      year={2025},
+
 }
 ```
