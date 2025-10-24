@@ -12,7 +12,7 @@
 
 ## 🎏 Introduction
 
-**STANCE** is a controllable image-to-video framework that keeps motion consistent while preserving appearance. 
+**STANCE** is a controllable image-to-video framework that keeps motion/collision physically plausible while preserving appearance. 
 
 * **Problem.** Purely visual video diffusion looks great but drifts or “hovers” near contacts, and sparse control maps get washed out after encoding.
 * **Key idea.** Turn masks/arrows (+ optional depth, mass) into dense 2.5D instance cues; keep them salient with **Dense RoPE** and stabilize with a joint RGB + structural head.
